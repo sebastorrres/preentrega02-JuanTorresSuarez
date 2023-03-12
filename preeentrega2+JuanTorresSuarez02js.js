@@ -1,77 +1,44 @@
- for(let i =1 ; i <=5; i++){
-    let materiaingresada = prompt('ingrese la materia')
-    if(materiaingresada === 'matematicas'){
-        alert('ha ingresado la materia matematicas')
-        break
-    }else if(materiaingresada === 'ingles'){
-        alert('ha ingresado materia ingles')
-        break
-    }
-    else if(materiaingresada === 'ciencias'){
-        alert('ha ingresado materia biologia')
-        break
-    }
-    else if(materiaingresada === 'geografia'){
-        alert('ha ingresado materia geografia')
-        break
-    }else{
-        alert('la materia ingresada no esta en la lista ')
-    }
-}
+const alumnos = [  {    nombre: "Alejandro",    notas: []
+  },
+  {
+    nombre: "Esteban",
+    notas: []
+  },
+  {
+    nombre: "Tomas",
+    notas: []
+  }
+];
 
-{
-const nota1 = parseInt(prompt('ingrese la primera nota de alejandro de 1 a 10'));
-const nota2 = parseInt(prompt('ingrese la segunda nota de alejadro de 1 a 10'));
-const nota3 = parseInt(prompt('ingrese la tercera nota de alejadro de 1 a 10'));
-const nota4 = parseInt(prompt('ingrese la cuarta nota de alejadro de 1 a 10'));
-const nota5 = parseInt(prompt('ingrese la quinta nota de alejadro de 1 a 10'));
-
-const promedio = (nota1 + nota2 + nota3 + nota4+ nota5)/5;
-    alert ("el promedio de alejadro es: "+ promedio);
-
-    if(promedio>10){
-    alert('el promedio no puede ser mayor a 10 ingrese las notas nuevamente')
-    }else if (promedio>5.9) {
-        alert('alejadro aprobo la materia');
-    }else{
-        alert('alejadro reprobo la materia');
-    }
-}
-
-{
-   const nota1 = parseInt(prompt('ingrese la primera nota de esteban de 1 a 10'));
-    const nota2 = parseInt(prompt('ingrese la segunda nota de esteban de 1 a 10'));
-    const nota3 = parseInt(prompt('ingrese la tercera nota de esteban de 1 a 10'));
-    const nota4 = parseInt(prompt('ingrese la cuarta nota de esteban de 1 a 10'));
-    const nota5 = parseInt(prompt('ingrese la quinta nota de esteban de 1 a 10'));
+for(let i=0; i<alumnos.length; i++){
+    let promedio = 0;
     
-    const promedio = (nota1 + nota2 + nota3 + nota4+ nota5)/5;
-        alert ("el promedio de esteban es: "+ promedio);
-    
-        if(promedio>10){
-        alert('el promedio no puede ser mayor a 10 ingrese las notas nuevamente')
-        }else if (promedio>5.9) {
-            alert('esteban aprobo la materia');
+    alert("Ingrese las 5 notas de " + alumnos[i].nombre);
+
+    for(let j=1; j<=5; j++){
+        const nota = parseInt(prompt(`Ingrese la nota ${j} de 1 a 10:`));
+        if(nota<1 || nota>10){
+            alert("La nota ingresada no es válida, ingrese de nuevo.");
+            j--;
         }else{
-            alert('esteban reprobo la materia');
+            alumnos[i].notas.push(nota);
         }
-}
+    }
 
-   {
-    const nota1 = parseInt(prompt('ingrese la primera nota de tomas de 1 a 10'));
-     const nota2 = parseInt(prompt('ingrese la segunda nota de tomas de 1 a 10'));
-     const nota3 = parseInt(prompt('ingrese la tercera nota de tomas de 1 a 10'));
-     const nota4 = parseInt(prompt('ingrese la cuarta nota de tomas de 1 a 10'));
-     const nota5 = parseInt(prompt('ingrese la quinta nota de tomas de 1 a 10'));
-     
-     const promedio = (nota1 + nota2 + nota3 + nota4+ nota5)/5;
-         alert ("el promedio de tomas es: "+ promedio);
-     
-         if(promedio>10){
-         alert('el promedio no puede ser mayor a 10 ingrese las notas nuevamente')
-         }else if (promedio>5.9) {
-             alert('tomas aprobo la materia');
-         }else{
-             alert('tomas reprobo la materia');
-         }
-     }
+    promedio = alumnos[i].notas.reduce((a, b) => a + b) / alumnos[i].notas.length;
+
+    alert(`El promedio de ${alumnos[i].nombre} es: ${promedio}`);
+
+    if(promedio > 10){
+        alert('El promedio no puede ser mayor a 10. Ingrese las notas nuevamente.');
+        i--;
+    }else if(promedio > 5.9){
+        alert(`${alumnos[i].nombre} aprobó la materia.`);
+    }else{
+        alert(`${alumnos[i].nombre} reprobó la materia.`);
+    }
+
+    console.log(`Las notas de ${alumnos[i].nombre} son: ${alumnos[i].notas}`);
+    const notasAprobadas = alumnos[i].notas.filter(nota => nota > 7);
+    console.log(`Las notas aprobadas de ${alumnos[i].nombre} son: ${notasAprobadas}`);
+}
